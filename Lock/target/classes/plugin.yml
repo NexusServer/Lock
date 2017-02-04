@@ -1,0 +1,19 @@
+name: Lock
+api: ["1.0.0"]
+version: "1.0"
+author: sabone
+main: nexus.Lock
+
+permissions: 
+ cmd.lock: 
+  default: true
+
+commands: 
+ lock: 
+  permission: cmd.lock
+  default: true
+  description: 잠금 / 해제를 하는 명령어 입니다.
+ share: 
+  permission: cmd.share
+  default: true
+  description: 잠금된 창고를 특정한 유저에게는 열수 있게 하는 명령어 입니다.
