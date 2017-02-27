@@ -68,7 +68,7 @@ class ChestLock extends PluginBase implements Listener{
 			if(player.isOp()){
 				return;
 			}
-			else if(this.config.get(xyz).toString().contains(player.getName())){
+			else if(LockFile.getInstance().isLock(block)){
 				player.sendMessage("[Lock] 잠겨있습니다.");
 				event.setCancelled();
 			}
