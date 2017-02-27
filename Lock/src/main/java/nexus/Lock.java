@@ -63,7 +63,7 @@ class ChestLock extends PluginBase implements Listener{
 		Player player=event.getPlayer();
 		String level=player.getLevel().getFolderName();
 		Block block=event.getBlock();
-		String xyz=block.getFloorX()+":"+block.getFloorY()+":"+block.getFloorZ()+":"+level;
+		String xyz=(block.getDamage()<=7) ? block.getFloorX()+":"+(block.getFloorY()+1)+":"+block.getFloorZ()+":"+level : block.getFloorX()+":"+(block.getFloorY()-1)+":"+block.getFloorZ()+":"+level;;
 		if(block.getId()==54||block.getId()==71||block.getId()==64||block.getId()==193||block.getId()==194||block.getId()==195||block.getId()==196||block.getId()==197){
 			if(player.isOp()){
 				return;
@@ -79,8 +79,8 @@ class ChestLock extends PluginBase implements Listener{
 		Player player=event.getPlayer();
 		String level=player.getLevel().getFolderName();
 		Block block=event.getBlock();
-		String xyz=block.getFloorX()+":"+block.getFloorY()+":"+block.getFloorZ()+":"+level;
-		if(block.getId()==54||block.getId()==71||block.getId()==64||block.getId()==193||block.getId()==194||block.getId()==195||block.getId()==196||block.getId()==197){
+		if(this.isDoor(block)){
+			String xyz=(block.getDamage()<=7) ? block.getFloorX()+":"+(block.getFloorY()+1)+":"+block.getFloorZ()+":"+level : block.getFloorX()+":"+(block.getFloorY()-1)+":"+block.getFloorZ()+":"+level;;
 			if(share.containsKey(player)){
 				if(!this.config.get(xyz).toString().contains("$"+player.getName())){
 					player.sendMessage("[Lock] 당신의 것이 아닙니다.");
@@ -101,7 +101,7 @@ class ChestLock extends PluginBase implements Listener{
 			}
 			if(list.contains(player)){
 				if(this.config.get(xyz).toString().startsWith("$"+player.getName())){
-					player.sendMessage("[Lock] 잠금 해데");
+					player.sendMessage("[Lock] 잠금 해제");
 					this.config.set(xyz, "false");
 					list.remove(player);
 					event.setCancelled();
@@ -130,5 +130,19 @@ class ChestLock extends PluginBase implements Listener{
 				}
 			}
 		}
+		// 상자일 경우 추가
+	}
+	
+	public boolean isDoor(Block block){
+		if(block.getId()==64||block.getId()==193||block.getId()==194||block.getId()==195||block.getId()==196||block.getId()==197){
+			return true;
+		}
+		return false;
+	}
+	public boolean isChest(Block block){
+		if(block.getId()==54){
+			return true;
+		}
+		return false;
 	}
 }
