@@ -15,4 +15,12 @@ public LockFile(Main plugin){
     str.append(pos.getFloorX+":").append(pos.getFloorY()+":").append(pos.getFloorZ()+":").append(pos.getLevel().getFolderName());
     return str.toString();
   }
+  public boolean isOwner(Position pos,Player player){
+  if(!data.containKey(pos)){
+    return false;
+  }
+  String[] member = data.get(pos).sp???(":");
+    return member[0].equals(player.getName().toLowerCase());
+  
+  }
 }
