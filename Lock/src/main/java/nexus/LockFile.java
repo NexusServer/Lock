@@ -49,10 +49,25 @@ public LockFile(Main plugin){
   }
     List<String> list = getMembers(pos);
     list.add(player.getName().toLowerCase());
-    data.put(String.join(":",list.toArray()));
+    data.put(toString(pos),String.join(":",list.toArray()));
     return;
   }
+  /*
+  * return is LockBlock
+  */
   public boolean isLock(Position pos){
     return data.containKey(toString(pos));
+  }
+  /*
+  * shareList del {player}
+  */
+  public void delMember(Position pos, Player player){
+    if(!isLock(pos)){
+  return;
+  }
+    List<String> list = getMembers(pos);
+    list.remove(player.getName().toLowerCase());
+    data.put(toString(pos),String.join(":",list.toArray()));
+    return;
   }
 }
