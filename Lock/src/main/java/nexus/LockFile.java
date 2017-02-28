@@ -28,12 +28,31 @@ public LockFile(Main plugin){
   if(!data.containKey(pos)){
     return false;
   }
-  String[] member = data.get(pos).sp???(":");
+  String[] member = data.get(pos).spilt(":");
     return member[0].equals(player.getName().toLowerCase());
   
   }
+  public List<String> getMembers(Position pos){
+    if(!isLock(pos)){
+    return null;
+    }
+     List<String> list = new ArrayList<String>():
+    String[] mem = data.get(toString(pos)).spilt(":");
+    for(String str : mem){
+    list.add(str);
+    }
+    return list;
+  }
+  public void addMember(Position pos,Player player){
+  if(!isLock(pos)){
+  return;
+  }
+    List<String> list = getMembers(pos);
+    list.add(player.getName().toLowerCase());
+    data.put(String.join(":",list.toArray()));
+    return;
+  }
   public boolean isLock(Position pos){
     return data.containKey(toString(pos));
-  
   }
 }
