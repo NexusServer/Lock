@@ -74,6 +74,18 @@ class ChestLock extends PluginBase implements Listener{
 			}
 		}
 	}
+	
+	@EventHandler
+	public void onDoortouch(DoorToggleEvent event){
+	if(LockFile.getInstance().isLock(event.getBlock())){
+		if(LockFile.getInstance().isMember(event.getBlock,event.getPlayer())){
+		}else{
+		event.getPlayer().sendMessage("is not your door");
+			event.setCancelled();
+		}
+	
+	}
+	}
 	@EventHandler
 	public void onTouch(PlayerInteractEvent event){
 		Player player=event.getPlayer();
